@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Class1 extends Model {}
+class Enemy extends Model {}
 
-Class1.init(
+Enemy.init(
     {
         id:  {
             type: DataTypes.INTEGER,
@@ -11,6 +11,10 @@ Class1.init(
             primaryKey: true,
             autoIncrement: true
           },
+        enemy_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         hp: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -56,8 +60,8 @@ Class1.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'Class1',
+        modelName: 'Class',
     },
 )
 
-module.exports = Class1;
+module.exports = { Enemy };

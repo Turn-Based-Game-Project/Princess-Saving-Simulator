@@ -29,7 +29,7 @@ User.prototype.isAlive = function () {
 };
 
 function critChance(move){
-    let critCalc = Math.random() + move.crit
+    let critCalc = Math.random() + this.crit
     if(critCalc > 1){
         critCalc = 1;
         return critCalc;
@@ -55,27 +55,54 @@ function calculateHP(character, damage) {
 User.prototype.userAttack = function (character2, move) {
     let moveDamage = damageRoll(move)
     let damage = character2.defense - (this.attack + moveDamage);
+    let finalDamage = ''
     if (damage < 0) {
-        damage = 0;
-    }
-    let crit = critChance();
-    if (crit > 0.90){
+        console.log('Had no effect!')
+       return finalDamage = 0;
+    }   
+
+    let crit = critChance;
+    if (crit > 0.85){
         console.log(`This is the damage before calculation: ${damage}`)
         damage *= 1.2;
-        finalDamage = math.floor(damage * 10) / 10
         console.log(`This is the damage after calculation: ${damage}`)
+        return finalDamage = Math.floor(damage * 10) / 10
     }
+    finalDamage = Math.floor(damage * 10) / 10
 
     const originalHP = character2.hp
-    let newHP = calculateHP(character2, damage)
+    let newHP = calculateHP(character2, finalDamage)
 
+    console.log(`${this.id} used ${move.name} and inflicted ${finalDamage} damage!`)
     console.log(`${character2.id} HP:${newHP}/${originalHP}`)
-    return damage;
+
+    return finalDamage
+
 };
 
 
-const punch = new Attack('Punch', 10, 0.15)
-const human = new User('Steve', 100, 80, 50, punch, 'Kick', 'Scream', 'Omega Big Fireball')
-const enemy = new User('Enemy_1', 100, 50, 150, punch, 'Serenade', 'Do Nothing', 'Selfdestruct')
+const punch = new Attack('Punch', 2, 0.15)
+const kick = new Attack('Kick', 2, .35)
+const magician = new User('Mariop', 100, 8, 5, punch, 'Kick', 'Scream', 'Omega Big Fireball')
+const enemy = new User('Bowsor', 100, 5, 15, punch, 'Serenade', 'Do Nothing', 'Selfdestruct')
 
-console.log(userAttack);
+console.log(magician.userAttack(enemy, punch))
+
+// let playerturn = true;
+
+// const turnInterval = setInterval(() => {
+//     // If either character is not alive, end the game
+//     if (!human.isAlive() || !enemy.isAlive()) {
+//       clearInterval(turnInterval);
+//       console.log('Game over!');
+//     } else if (playerturn) {
+//       human.userAttack(enemy, kick);
+//       console.log(`${enemy.id} has ${enemy.hp} HP left.`)
+//     } else {
+//       enemy.userAttack(human, punch);
+//       console.log(`${human.id} has ${human.hp} HP left.`)
+//     }
+  
+//     // Switch turns
+//     playerturn = !playerturn;
+//   }, 2000);

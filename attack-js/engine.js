@@ -1,4 +1,4 @@
-const { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, ice_wall, invisibilty } = require('./attack_variables');
+const { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty } = require('./attack_variables');
 const color = {
     reset: "\x1b[0m",
     bright: "\x1b[1m",
@@ -17,6 +17,8 @@ const color = {
     white: "\x1b[37m",
   };
 
+ 
+
 class User {
     constructor(id, hp, maxhp, attack, defense, move_1, move_2, move_3, move_4){
         this.id = id;
@@ -31,6 +33,9 @@ class User {
     }
 }
 
+const human = new User('Mariop', 50, 100, 20, 5, mash, charge, block, stone_armor)
+const enemy = new User('Bowsor', 150, 150, 5, 7, fireball, wand_smack, mash, invisibilty)
+
 User.prototype.isAlive = function () {
     if (this.hp > 0) {
       console.log(`${this.id} HP: ${this.hp}/${this.maxhp}`);
@@ -39,6 +44,31 @@ User.prototype.isAlive = function () {
     console.log(`${this.id} has died!`);
     return false;
 };
+
+function buffCheck(user, move){
+    switch (move.name){
+        case '\x1B[32mStone Armor\x1B[0m':
+            console.log(`The original defense is ${user.defense}.`)
+            user.defense += 10
+            console.log(`The new defense is ${user.defense}.`)
+            console.log(`${user.id} used ${move.name}.`)
+            break;
+        case '\x1B[32mHeal\x1B[0m':
+            const originalHP = user.maxhp
+            console.log(`Original HP was ${user.hp}. `)
+            user.hp += 35
+            console.log(`New hp is ${user.hp}`)
+            if(user.hp > originalHP){
+                user.hp = originalHP
+            }
+            console.log(`${user.id} used ${move.name}.`)
+            console.log(`${user.id} healed! ${user.hp}/${originalHP}`)
+            break
+        default:
+            break
+    }
+   };
+
 
 function critChance(move){
     let critCalc = Math.random() + move.crit
@@ -51,7 +81,7 @@ function critChance(move){
 }
 
 function critCalc(damage){
-    const critDamage = Math.floor(damage + (damage * 1.2));
+    const critDamage = Math.floor((damage * 1.2));
     return critDamage;
 
 }
@@ -71,7 +101,7 @@ function calculateHP(character, damage) {
     return character.hp;
 }
 
-
+//---------------------Attack Function-------------------//
 User.prototype.userAttack = function (character2, move) {
     //--------------------Visual Aid---------------------//
     if(this.id === 'Mariop'){
@@ -86,20 +116,21 @@ User.prototype.userAttack = function (character2, move) {
     //---------------Value Variables---------------------//
     let finalDamage;
     let newHP;
-    const originalHP = character2.hp
+    const originalHP = character2.maxhp
     //---------------------------------------------------//
 
-    //--------------------Buff TBD-----------------------//
-    if (move.attack === 0){
-        console.log(`${this.id} used ${move.name} This attack does nat 0 damage. this is probably a buff`)
-        return true
-    }
-    //---------------------------------------------------//
 
-    //---------------Base Damage Calculation-----------------
+    //--------------------Buff Check-----------------------//
+    if (move.type === 'buff'){
+    console.log('We are inside the if statement.')
+    console.log(buffCheck(this, move));
+    return true
+    };
+    
+    //---------------Base Damage Calculation----------------//
     let moveDamage = damageRoll(move)
     let damage = (this.attack + moveDamage)- character2.defense;
-    //---------------------------------------------------//
+
 
     //----------------Damage Checks----------------------//
     if (damage <= 0) {
@@ -110,11 +141,12 @@ User.prototype.userAttack = function (character2, move) {
         return true;
     }   // Should activate on attacks with 0 damage after roll.
 
+    //-----------------Crit Check-------------------------//
     let crit = critChance(move);
 
     if (crit > 0.50){
         finalDamage = critCalc(damage);
-
+        
         newHP = calculateHP(character2, finalDamage)
     
         console.log(`Critical Hit! ${this.id} used ${move.name} and inflicted an increased ${finalDamage} damage!`)
@@ -126,7 +158,6 @@ User.prototype.userAttack = function (character2, move) {
 
     finalDamage = damage
 
-   
     newHP = calculateHP(character2, finalDamage)
 
     console.log(`${this.id} used ${move.name} and inflicted ${finalDamage} damage!`)
@@ -135,22 +166,17 @@ User.prototype.userAttack = function (character2, move) {
     return true
 
 };
+console.log(human.userAttack(enemy, heal))
 
 
-const human = new User('Mariop', 100, 100, 8, 5, mash, charge, block, stone_armor)
-const enemy = new User('Bowsor', 150, 150, 5, 7, fireball, wand_smack, ice_wall, invisibilty)
-
-// console.log(human.userAttack(enemy, stone_armor))
-
-
-//-----------------------Turn Based Logic----------------------------
+//-----------------------Turn Based Logic--------------------------//
 let enemyAttack
 let playerAttack
 let choice
 
 function enemyAtk(){
     choice = Math.floor(Math.random() * 4) 
-    enemyAttack = [fireball, wand_smack, ice_wall, invisibilty]
+    enemyAttack = [fireball, charge, mash, invisibilty]
     for(let i = 0; i < enemyAttack.length; i++){
     switch (choice){
         case 0:
@@ -191,13 +217,17 @@ function playerAtk(){
 
 let playerturn = true;
 
-const turnInterval = setInterval(() => {
+function turnCycle(move){ 
+    const turn = setInterval(() => {
     // If either character is not alive, end the game
-    if (!human.isAlive() || !enemy.isAlive()) {
-      clearInterval(turnInterval);
+    if (!human.isAlive()) {
+      clearInterval(turn);
       console.log('Game over!');
+    } else if (!enemy.isAlive()){
+        clearInterval(turn);
+        console.log('You won!');
     } else if (playerturn) {
-      human.userAttack(enemy,playerAtk());
+      human.userAttack(enemy, move);
       console.log(`${enemy.id} has ${enemy.hp} HP left.`)
     } else {
       enemy.userAttack(human, enemyAtk());
@@ -206,4 +236,5 @@ const turnInterval = setInterval(() => {
     console.log('---------------------------------------------')
     // Switch turns
     playerturn = !playerturn;
-  }, 2000);
+  }, 1000);
+}

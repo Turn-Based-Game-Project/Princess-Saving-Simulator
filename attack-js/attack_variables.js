@@ -10,8 +10,8 @@ const attack_elixir = attack.module.attack_elixir;
 const dodge = attack.module.dodge;
 const fireball = attack.module.fireball;
 const wand_smack = attack.module.wand_smack;
-const ice_wall = attack.module.ice_wall;
+const heal = attack.module.heal;
 const invisibilty = attack.module.invisibilty;
 
 
-module.exports = {mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, ice_wall, invisibilty}
+module.exports = {mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty};

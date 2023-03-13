@@ -1,4 +1,8 @@
 const { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty } = require('./attack_variables');
+const { healCalc, stoneArmorCalc}  = require('./buff')
+
+
+
 const color = {
     reset: "\x1b[0m",
     bright: "\x1b[1m",
@@ -33,8 +37,9 @@ class User {
     }
 }
 
-const human = new User('Mariop', 50, 100, 20, 5, mash, charge, block, stone_armor)
+const human = new User('Mariop', 100, 100, 20, 5, mash, charge, block, stone_armor)
 const enemy = new User('Bowsor', 150, 150, 5, 7, fireball, wand_smack, mash, invisibilty)
+
 
 User.prototype.isAlive = function () {
     if (this.hp > 0) {
@@ -48,18 +53,10 @@ User.prototype.isAlive = function () {
 function buffCheck(user, move){
     switch (move.name){
         case 'Stone Armor':
-            console.log(`The original defense is ${user.defense}.`)
-            user.defense += 10
-            console.log(`The new defense is ${user.defense}.`)
-            console.log(`${user.id} used ${move.name}.`)
+            stoneArmorCalc(user)
             break;
         case 'Heal':
-            user.hp += 35
-            if(user.hp > user.maxhp){
-                user.hp = user.maxhp
-            }
-            console.log(`${user.id} used ${move.name}.`)
-            console.log(`${user.id} healed! ${user.hp}/${user.maxhp}`)
+            healCalc(user)
             break
         default:
             break
@@ -98,7 +95,7 @@ function calculateHP(character, damage) {
     return character.hp;
 }
 
-//---------------------Attack Function-------------------//
+//---------------------Attack Function-------------------------------------------------------------------//
 User.prototype.userAttack = function (character2, move) {
     //--------------------Visual Aid---------------------//
     if(this.id === 'Mariop'){
@@ -130,7 +127,7 @@ User.prototype.userAttack = function (character2, move) {
         finalDamage = 0;
         newHP = calculateHP(character2, finalDamage)
         console.log(`${this.id} used ${move.name} and had no effect!`)
-        console.log(`${character2.id} HP:${newHP}/${originalHP}`)
+        console.log(`${character2.id} HP:${newHP}/${character2.maxhp}`)
         return true;
     }   // Should activate on attacks with 0 damage after roll.
 
@@ -188,7 +185,7 @@ function enemyAtk(){
 
 function playerAtk(){
         choice = Math.floor(Math.random() * 4) 
-        playerAttack = [heal, heal, heal, stab]
+        playerAttack = [heal, mash, fire_arrow, stab]
         for(let i = 0; i < playerAttack.length; i++){
         switch (choice){
             case 0:
@@ -208,7 +205,7 @@ function playerAtk(){
 
 let playerturn = true;
 
-function turnCycle(move){ 
+function turnCycle(){ 
     const turn = setInterval(() => {
     // If either character is not alive, end the game
     if (!human.isAlive()) {
@@ -218,7 +215,7 @@ function turnCycle(move){
         clearInterval(turn);
         console.log('You won!');
     } else if (playerturn) {
-      human.userAttack(enemy, move);
+      human.userAttack(enemy, playerAtk());
       console.log(`${enemy.id} has ${enemy.hp} HP left.`)
     } else {
       enemy.userAttack(human, enemyAtk());
@@ -227,7 +224,7 @@ function turnCycle(move){
     console.log('---------------------------------------------')
     // Switch turns
     playerturn = !playerturn;
-  }, 1000);
+  }, 2000);
 }
 
 turnCycle(playerAtk())

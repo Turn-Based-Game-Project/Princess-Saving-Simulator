@@ -47,22 +47,19 @@ User.prototype.isAlive = function () {
 
 function buffCheck(user, move){
     switch (move.name){
-        case '\x1B[32mStone Armor\x1B[0m':
+        case 'Stone Armor':
             console.log(`The original defense is ${user.defense}.`)
             user.defense += 10
             console.log(`The new defense is ${user.defense}.`)
             console.log(`${user.id} used ${move.name}.`)
             break;
-        case '\x1B[32mHeal\x1B[0m':
-            const originalHP = user.maxhp
-            console.log(`Original HP was ${user.hp}. `)
+        case 'Heal':
             user.hp += 35
-            console.log(`New hp is ${user.hp}`)
-            if(user.hp > originalHP){
-                user.hp = originalHP
+            if(user.hp > user.maxhp){
+                user.hp = user.maxhp
             }
             console.log(`${user.id} used ${move.name}.`)
-            console.log(`${user.id} healed! ${user.hp}/${originalHP}`)
+            console.log(`${user.id} healed! ${user.hp}/${user.maxhp}`)
             break
         default:
             break
@@ -107,23 +104,19 @@ User.prototype.userAttack = function (character2, move) {
     if(this.id === 'Mariop'){
         character2.id = `${color.red}${character2.id}${color.reset}`
         this.id = `${color.green}${this.id}${color.reset}`
-        move.name = `${color.green}${move.name}${color.reset}`
     } if (this.id === 'Bowsor'){
         character2.id = `${color.green}${character2.id}${color.reset}`
         this.id = `${color.red}${this.id}${color.reset}`
-        move.name = `${color.red}${move.name}${color.reset}`
     }
     //---------------Value Variables---------------------//
     let finalDamage;
     let newHP;
-    const originalHP = character2.maxhp
     //---------------------------------------------------//
 
 
     //--------------------Buff Check-----------------------//
     if (move.type === 'buff'){
-    console.log('We are inside the if statement.')
-    console.log(buffCheck(this, move));
+    buffCheck(this, move)
     return true
     };
     
@@ -150,7 +143,7 @@ User.prototype.userAttack = function (character2, move) {
         newHP = calculateHP(character2, finalDamage)
     
         console.log(`Critical Hit! ${this.id} used ${move.name} and inflicted an increased ${finalDamage} damage!`)
-        console.log(`${character2.id} HP:${newHP}/${originalHP}`)
+        console.log(`${character2.id} HP:${newHP}/${character2.maxhp}`)
       
         return true
     }   
@@ -161,12 +154,11 @@ User.prototype.userAttack = function (character2, move) {
     newHP = calculateHP(character2, finalDamage)
 
     console.log(`${this.id} used ${move.name} and inflicted ${finalDamage} damage!`)
-    console.log(`${character2.id} HP:${newHP}/${originalHP}`)
+    console.log(`${character2.id} HP:${newHP}/${character2.maxhp}`)
   
     return true
 
 };
-console.log(human.userAttack(enemy, heal))
 
 
 //-----------------------Turn Based Logic--------------------------//
@@ -176,7 +168,7 @@ let choice
 
 function enemyAtk(){
     choice = Math.floor(Math.random() * 4) 
-    enemyAttack = [fireball, charge, mash, invisibilty]
+    enemyAttack = [fireball, wand_smack, mash, stone_armor]
     for(let i = 0; i < enemyAttack.length; i++){
     switch (choice){
         case 0:
@@ -196,7 +188,7 @@ function enemyAtk(){
 
 function playerAtk(){
         choice = Math.floor(Math.random() * 4) 
-        playerAttack = [mash, fire_arrow, stab, stone_armor]
+        playerAttack = [heal, heal, heal, stab]
         for(let i = 0; i < playerAttack.length; i++){
         switch (choice){
             case 0:
@@ -213,7 +205,6 @@ function playerAtk(){
         }
     
     };
-
 
 let playerturn = true;
 
@@ -238,3 +229,5 @@ function turnCycle(move){
     playerturn = !playerturn;
   }, 1000);
 }
+
+turnCycle(playerAtk())

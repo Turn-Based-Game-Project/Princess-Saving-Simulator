@@ -27,10 +27,10 @@ const enemyData = [
         hp: 1000,
         attack: 20,
         defense: 20,
-        move_1: "Slash",
-        move_2: "Ranged",
-        move_3: "Special",
-        move_4: "Heal",
+        move_1: "Scourge",
+        move_2: "Lifesiphon",
+        move_3: "Ultima",
+        move_4: "Divine Intervention",
     }
 ];
 

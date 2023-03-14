@@ -1,6 +1,5 @@
-const { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty } = require('./attack_variables');
-const { healCalc, stoneArmorCalc}  = require('./buff')
-
+const { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty, chop, bite, rage, leer, scratch, cry, kick, scourge, lifesiphon, ultima, divine_intervention } = require('./attack_variables');
+const { healCalc, stoneArmorCalc, divineIntervention}  = require('./buff')
 
 
 const color = {
@@ -39,6 +38,7 @@ class User {
 
 const human = new User('Mariop', 100, 100, 20, 5, mash, charge, block, stone_armor)
 const enemy = new User('Bowsor', 150, 150, 5, 7, fireball, wand_smack, mash, invisibilty)
+const dragon_god = new User('Dorgon', 500, 500, 30, 20, scourge, lifesiphon, ultima, divine_intervention)
 
 
 User.prototype.isAlive = function () {
@@ -50,14 +50,17 @@ User.prototype.isAlive = function () {
     return false;
 };
 
-function buffCheck(user, move){
+function buffCheck(user, move, character2){
     switch (move.name){
         case 'Stone Armor':
             stoneArmorCalc(user)
             break;
         case 'Heal':
             healCalc(user)
-            break
+            break;
+        case 'Divine Intervention':
+            divineIntervention(user, character2);
+            break;
         default:
             break
     }
@@ -113,10 +116,10 @@ User.prototype.userAttack = function (character2, move) {
 
     //--------------------Buff Check-----------------------//
     if (move.type === 'buff'){
-    buffCheck(this, move)
+    buffCheck(this, move, character2)
     return true
     };
-    
+
     //---------------Base Damage Calculation----------------//
     let moveDamage = damageRoll(move)
     let damage = (this.attack + moveDamage)- character2.defense;
@@ -157,6 +160,7 @@ User.prototype.userAttack = function (character2, move) {
 
 };
 
+console.log(dragon_god.userAttack(human, divine_intervention))
 
 //-----------------------Turn Based Logic--------------------------//
 let enemyAttack
@@ -165,7 +169,7 @@ let choice
 
 function enemyAtk(){
     choice = Math.floor(Math.random() * 4) 
-    enemyAttack = [fireball, wand_smack, mash, stone_armor]
+    enemyAttack = [scourge, lifesiphon, ultima, divine_intervention]
     for(let i = 0; i < enemyAttack.length; i++){
     switch (choice){
         case 0:
@@ -218,7 +222,7 @@ function turnCycle(){
       human.userAttack(enemy, playerAtk());
       console.log(`${enemy.id} has ${enemy.hp} HP left.`)
     } else {
-      enemy.userAttack(human, enemyAtk());
+      dragon_god.userAttack(human, enemyAtk());
       console.log(`${human.id} has ${human.hp} HP left.`)
     }
     console.log('---------------------------------------------')
@@ -226,5 +230,4 @@ function turnCycle(){
     playerturn = !playerturn;
   }, 2000);
 }
-
-turnCycle(playerAtk())
+// turnCycle()

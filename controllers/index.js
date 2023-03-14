@@ -1,26 +1,9 @@
 const router = require('express').Router();
-const { Class } = require('../models/Class');
-const { Enemy } = require('../models/Enemy');
 
+const apiRoutes = require('./api/index');
+const classEnemyRoutes = require('./class-enemy-routes.js');
 
-router.get('/', async (req, res) => {
-    try {
-        const classData = await Class.findAll({
-            attributes: { exclude: ['createdAt', 'updatedAt'] }
-        });
-        const enemyData = await Enemy.findAll({
-            attributes: { exclude: ['createdAt', 'updatedAt'] }
-        });
-        const classes = classData.map(x=>x.get({ plain:true }));
-        const enemies = enemyData.map(x=>x.get({ plain:true }));
-        console.log(classes);
-        console.log(enemies);
-        res.render('homepage', { classes, enemies });
-    }
-    catch { (err) => {
-        console.log(err);
-        res.status(500).json(err);
-    }}
-});
+router.use('/battle', classEnemyRoutes);
+router.use('/api', apiRoutes);
 
 module.exports = router;

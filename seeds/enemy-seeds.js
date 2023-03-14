@@ -5,6 +5,7 @@ const enemyData = [
     {
         enemy_name: "Orc",
         hp: 300,
+        max_hp: 300,
         attack: 8,
         defense: 20,
         move_1: "Chop",
@@ -15,6 +16,7 @@ const enemyData = [
     {
         enemy_name: "Goblin",
         hp: 200,
+        max_hp: 200,
         attack: 6,
         defense: 15,
         move_1: "Leer",
@@ -25,12 +27,13 @@ const enemyData = [
     {
         enemy_name: "Dragon God",
         hp: 1000,
+        max_hp: 1000,
         attack: 20,
         defense: 20,
-        move_1: "Slash",
-        move_2: "Ranged",
-        move_3: "Special",
-        move_4: "Heal",
+        move_1: "Scourge",
+        move_2: "Lifesiphon",
+        move_3: "Ultima",
+        move_4: "Divine Intervention",
     }
 ];
 

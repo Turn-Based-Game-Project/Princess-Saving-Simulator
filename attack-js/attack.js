@@ -29,16 +29,16 @@ const attack = {
     },
     fire_arrow: {
         name: 'Fire Arrow',
-        attack: 3,
+        attack: 12,
         crit: 0.3,
         type: 'attack',
         description: 'User shoots a fire arrow at the opponent. High critical chance.'
     },
     stab: {
         name: 'Stab',
-        attack: 2,
+        attack: 4,
         crit: 0.15,
-        type: 'attack',
+        type: 'special',
         description: 'User stabs the opponent. This hits 2-5 times. '
     },
     attack_elixir:{
@@ -66,7 +66,7 @@ const attack = {
         name: 'Wand Smack',
         attack: 1,
         crit: 0.01,
-        type: 'attack',
+        type: 'special',
         description: 'The user simply hits the opponent with a wand to do mediorce damage. Or does it...?'
     },
     heal:{
@@ -95,7 +95,7 @@ const attack = {
         name: 'Bite',
         attack: 12,
         crit: 0.2,
-        type: 'attack',
+        type: 'special',
         description: 'User bites the opponent tightly, hurting itself in the process.'
     },
     rage:{
@@ -135,28 +135,28 @@ const attack = {
     },
     scourge:{
         name: 'Scourge',
-        attack: '20',
+        attack: 20,
         crit: 0.2,
         type: 'attack', 
         description: 'User whips its tail at the opponent.'
     },
     lifesiphon:{
         name: 'Lifesiphon',
-        attack: '10',
+        attack: 10,
         crit: 0.0,
-        type: 'attack', 
+        type: 'special', 
         description: 'User steals the life force from the opponent.'
     },
     ultima:{
         name: 'Ultima',
-        attack: '50',
+        attack: 20,
         crit: 0.0,
         type: 'attack', 
         description: 'User conjures the ultimate magic and deals massive damage.'
     },
     divine_intervention:{
         name: 'Divine Intervention',
-        attack: '0',
+        attack: 0,
         crit: 0,
         type: 'buff', 
         description: 'User calls on divine intervention. Has a chance to heal the user, increase attack and defense of the user, heal the opponent, or instantly KO the opponent.'

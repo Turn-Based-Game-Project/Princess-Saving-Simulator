@@ -5,6 +5,7 @@ const classData = [
     {
         class_name: "Dwarf",
         hp: 200,
+        max_hp: 200,
         attack: 10,
         defense: 20,
         move_1: "Mash",
@@ -15,6 +16,7 @@ const classData = [
     {
         class_name: "Elf",
         hp: 150,
+        max_hp: 150,
         attack: 15,
         defense: 12,
         move_1: "Fire Arrow",
@@ -25,6 +27,7 @@ const classData = [
     {
         class_name: "Magician",
         hp: 75,
+        max_hp: 75,
         attack: 20,
         defense: 10,
         move_1: "Fireball",

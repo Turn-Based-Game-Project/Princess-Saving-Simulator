@@ -15,6 +15,14 @@ Enemy.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        max_hp: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 100,
+            validate: {
+                isNumeric: true,
+            } ,
+        },
         hp: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -60,7 +68,7 @@ Enemy.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'Class',
+        modelName: 'Enemy',
     },
 )
 

@@ -1,5 +1,6 @@
 const { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty, chop, bite, rage, leer, scratch, cry, kick, scourge, lifesiphon, ultima, divine_intervention } = require('./attack_variables');
-const { healCalc, stoneArmorCalc, divineIntervention}  = require('./buff')
+const { healCalc, stoneArmorCalc, divineIntervention, lifesiphonCalc, stabCalc}  = require('./buff')
+const { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck } = require('./checks')
 
 
 const color = {
@@ -38,7 +39,7 @@ class User {
 
 const human = new User('Mariop', 100, 100, 20, 5, mash, charge, block, stone_armor)
 const enemy = new User('Bowsor', 150, 150, 5, 7, fireball, wand_smack, mash, invisibilty)
-const dragon_god = new User('Dorgon', 500, 500, 30, 20, scourge, lifesiphon, ultima, divine_intervention)
+const dragon_god = new User('Dorgon', 400, 500, 20, 20, scourge, lifesiphon, ultima, divine_intervention)
 
 
 User.prototype.isAlive = function () {
@@ -50,53 +51,6 @@ User.prototype.isAlive = function () {
     return false;
 };
 
-function buffCheck(user, move, character2){
-    switch (move.name){
-        case 'Stone Armor':
-            stoneArmorCalc(user)
-            break;
-        case 'Heal':
-            healCalc(user)
-            break;
-        case 'Divine Intervention':
-            divineIntervention(user, character2);
-            break;
-        default:
-            break
-    }
-   };
-
-
-function critChance(move){
-    let critCalc = Math.random() + move.crit
-    if(critCalc > 1){
-        critCalc = 1;
-        return critCalc;
-    } else {
-        return critCalc;
-    }
-}
-
-function critCalc(damage){
-    const critDamage = Math.floor((damage * 1.2));
-    return critDamage;
-
-}
-
-function damageRoll(move){
-    let roll = Math.floor((Math.random() * 6) -2)
-    return move.attack + roll
-}
-
-
-
-function calculateHP(character, damage) {
-    character.hp -= damage;
-    if (character.hp < 0) {
-        character.hp = 0;
-    }
-    return character.hp;
-}
 
 //---------------------Attack Function-------------------------------------------------------------------//
 User.prototype.userAttack = function (character2, move) {
@@ -104,7 +58,7 @@ User.prototype.userAttack = function (character2, move) {
     if(this.id === 'Mariop'){
         character2.id = `${color.red}${character2.id}${color.reset}`
         this.id = `${color.green}${this.id}${color.reset}`
-    } if (this.id === 'Bowsor'){
+    } if (this.id === 'Dorgon'){
         character2.id = `${color.green}${character2.id}${color.reset}`
         this.id = `${color.red}${this.id}${color.reset}`
     }
@@ -122,8 +76,7 @@ User.prototype.userAttack = function (character2, move) {
 
     //---------------Base Damage Calculation----------------//
     let moveDamage = damageRoll(move)
-    let damage = (this.attack + moveDamage)- character2.defense;
-
+    let damage = (this.attack + moveDamage) - character2.defense;
 
     //----------------Damage Checks----------------------//
     if (damage <= 0) {
@@ -134,10 +87,16 @@ User.prototype.userAttack = function (character2, move) {
         return true;
     }   // Should activate on attacks with 0 damage after roll.
 
-    //-----------------Crit Check-------------------------//
+     //---------------------Special Move Check-------------//
+    if (move.type === 'special'){
+        specialCheck(this, character2, move, damage)
+        return true
+    }
+
+     //-----------------Crit Check-------------------------//
     let crit = critChance(move);
 
-    if (crit > 0.50){
+    if (crit > 0.80){
         finalDamage = critCalc(damage);
         
         newHP = calculateHP(character2, finalDamage)
@@ -148,7 +107,8 @@ User.prototype.userAttack = function (character2, move) {
         return true
     }   
     // If damage is > 0, then the crit function will roll to see if damage is multiplied by 1.2x.
-
+   
+ 
     finalDamage = damage
 
     newHP = calculateHP(character2, finalDamage)
@@ -160,9 +120,15 @@ User.prototype.userAttack = function (character2, move) {
 
 };
 
-console.log(dragon_god.userAttack(human, divine_intervention))
+const roll = 2
+function stabTimes(user, character2, move){ for (let i = 0; i < roll; i++){
+stabCalc(user, character2, move)
+};
+console.log(`${character2.hp}/${character2.maxhp}`)
+};
 
-//-----------------------Turn Based Logic--------------------------//
+stabTimes(human, enemy, stab);
+//------------------------------------------Turn Based Logic-------------------------------------//
 let enemyAttack
 let playerAttack
 let choice
@@ -208,26 +174,29 @@ function playerAtk(){
     };
 
 let playerturn = true;
-
-function turnCycle(){ 
+function turnCycle(user, enemy){ 
     const turn = setInterval(() => {
     // If either character is not alive, end the game
-    if (!human.isAlive()) {
+    if (!user.isAlive()) {
       clearInterval(turn);
       console.log('Game over!');
     } else if (!enemy.isAlive()){
         clearInterval(turn);
         console.log('You won!');
     } else if (playerturn) {
-      human.userAttack(enemy, playerAtk());
+      user.userAttack(enemy, playerAtk());
       console.log(`${enemy.id} has ${enemy.hp} HP left.`)
     } else {
-      dragon_god.userAttack(human, enemyAtk());
-      console.log(`${human.id} has ${human.hp} HP left.`)
+      enemy.userAttack(user, enemyAtk());
+      console.log(`${user.id} has ${user.hp} HP left.`)
     }
     console.log('---------------------------------------------')
     // Switch turns
     playerturn = !playerturn;
   }, 2000);
 }
-// turnCycle()
+
+function hello(){
+    console.log('hello')
+}
+module.exports = {hello, turnCycle}

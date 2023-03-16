@@ -196,7 +196,4 @@ function turnCycle(user, enemy){
   }, 2000);
 }
 
-function hello(){
-    console.log('hello')
-}
-module.exports = {hello, turnCycle}
+turnCycle(human, enemy)

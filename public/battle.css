@@ -1,0 +1,138 @@
+html{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.background{
+    position: absolute;
+    width: 99vw;
+    height: 96vh;
+    background-image: url('../sprites/RK6Tqo.png');
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #111;
+}
+
+.container{
+    position: absolute;
+    width: 600px;
+    height: 100px;
+    border: 1px solid #111;
+    left: 470px;
+    top: 50px;
+    background-color: rgb(115, 148, 240);
+    border: 2px solid #565656;
+    border-radius: 8px;
+}
+
+.character1{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    bottom: 300px;
+    left: 150px;
+    background-image: url("/sprites/dwarf-model.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.character2{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    right: 150px;
+    bottom: 300px;
+    background-image: url("/sprites/enemy1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.user-hp-container{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 260px;
+    left: 140px;
+    width: 200px;
+}
+
+.user-hp-bar{
+    width: 150px;
+    height: 20px;
+    border-radius: 8px;
+    border: 2px solid #565656;
+    background-color: greenyellow;
+    margin-left: 3px;
+    text-align: right;
+    padding-right: 7px;
+}
+
+.enemy-hp-bar{
+    width: 150px;
+    height: 20px;
+    border-radius: 8px;
+    border: 2px solid #565656;
+    background-color: greenyellow;
+    margin-left: 3px;
+    text-align: right;
+    padding-right: 7px;
+}
+.enemy-hp-container{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 200px;
+    bottom: 260px;
+    right: 150px;
+}
+
+.moves{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    height: 200px;
+    bottom: 50px;
+    right: 415px;
+    justify-content: space-between;
+}
+
+.move{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 2px solid #565656;
+    border-radius: 8px;
+    width: 49%;
+    height: 50%;
+    margin-top: 8px;
+    background-color: rgb(115, 148, 240)
+};
+
+.move-container {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+
+.description, .attack{
+    width: 100%;
+    text-align: center;
+}
+
+.move:hover{
+    cursor: pointer;
+    background-color: rgb(153, 174, 230)   
+}
+
+.dialogue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+

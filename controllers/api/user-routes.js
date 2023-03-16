@@ -1,6 +1,41 @@
 const router = require('express').Router();
 const { User } = require('../../models/User');
 
+
+/* router.get('/', async (req, res) => {
+  try {
+    const allUsers = await User.findAll({
+      attributes: {
+      exclude: ['password']
+      }
+    });
+    const users = allUsers.map(x=>x.get({ plain: true }))
+    console.log(users);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+}); */
+
+router.post('/', async (req, res) => {
+  try {
+    const dbUserData = await User.create({
+      user_name: req.body.user_name,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    res.status(200).json("User created successfully!");
+    process.exit();
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
+
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });

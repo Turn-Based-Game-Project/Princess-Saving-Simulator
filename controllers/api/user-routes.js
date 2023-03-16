@@ -26,7 +26,6 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
     res.status(200).json("User created successfully!");
-    process.exit();
 
   } catch (err) {
     console.log(err);

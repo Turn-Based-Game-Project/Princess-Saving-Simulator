@@ -1,4 +1,4 @@
-const attack = {
+ export const attack = {
     mash: {
         name: 'Mash',
         attack: 5,
@@ -164,4 +164,3 @@ const attack = {
 
 }
 
-exports.module = attack

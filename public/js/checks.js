@@ -62,4 +62,4 @@ function calculateHP(character, damage) {
     return character.hp;
 }
 
-module.exports = { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck }
+export { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck,}

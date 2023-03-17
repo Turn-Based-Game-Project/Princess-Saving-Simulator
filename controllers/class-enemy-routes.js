@@ -34,6 +34,16 @@ router.get('/battle', async (req, res) => {
     }
 });
 
+router.get('/startScreen', (req, res) => {
+    try {
+        res.render('startScreen');
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
       res.redirect('/');

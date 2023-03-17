@@ -12,7 +12,7 @@ const loginFormHandler = async (event) => {
       });
   
       if (response.ok) {
-        document.location.replace('/battle');
+        document.location.replace('/startScreen');
       } else {
         alert('Failed to log in.');
       }

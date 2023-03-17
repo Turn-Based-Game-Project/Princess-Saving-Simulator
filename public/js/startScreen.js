@@ -38,7 +38,7 @@ const sceneLoader = (currentScene) => {
     magicianButton.hidden = true;
     elfButton.hidden = true;
     const startScreen = new Image();
-      startScreen.src = './game-sprites/startScreen.png';
+      startScreen.src = '/sprites/startScreen.png';
       startScreen.onload = () => {
         canvas.width = startScreen.width;
         canvas.height = startScreen.height

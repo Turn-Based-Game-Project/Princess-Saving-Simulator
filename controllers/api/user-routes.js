@@ -2,7 +2,8 @@ const router = require('express').Router();
 const { User } = require('../../models/User');
 
 
-/* router.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
+  res.render('homepage')
   try {
     const allUsers = await User.findAll({
       attributes: {
@@ -16,7 +17,7 @@ const { User } = require('../../models/User');
     console.log(err);
     res.status(500).json(err);
   }
-}); */
+});
 
 router.post('/', async (req, res) => {
   try {
@@ -26,6 +27,7 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
     res.status(200).json("User created successfully!");
+    process.exit();
 
   } catch (err) {
     console.log(err);
@@ -33,6 +35,8 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/login', async (req, res) => {
+});
 
 
 router.post('/login', async (req, res) => {

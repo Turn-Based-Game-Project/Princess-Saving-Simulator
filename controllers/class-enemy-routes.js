@@ -4,6 +4,7 @@ const { Enemy } = require('../models/Enemy');
 
 
 router.get('/', async (req, res) => {
+    console.log('hello world')
     try {
         const classData = await Class.findAll({
             attributes: { exclude: ['createdAt', 'updatedAt'] }

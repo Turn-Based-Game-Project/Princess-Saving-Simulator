@@ -1,6 +1,6 @@
-const { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty, chop, bite, rage, leer, scratch, cry, kick, scourge, lifesiphon, ultima, divine_intervention } = require('./attack_variables');
-const { healCalc, stoneArmorCalc, divineIntervention, lifesiphonCalc, stabCalc}  = require('./buff')
-const { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck } = require('./checks')
+import { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty, chop, bite, rage, leer, scratch, cry, kick, scourge, lifesiphon, ultima, divine_intervention } from '/js/attack_variables.js';
+import { healCalc, stoneArmorCalc, divineIntervention, lifesiphonCalc, stabCalc} from '/js/buff.js';
+import { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck } from '/js/checks.js';
 
 
 const color = {
@@ -120,14 +120,14 @@ User.prototype.userAttack = function (character2, move) {
 
 };
 
-const roll = 2
-function stabTimes(user, character2, move){ for (let i = 0; i < roll; i++){
-stabCalc(user, character2, move)
-};
-console.log(`${character2.hp}/${character2.maxhp}`)
-};
+// const roll = 2
+// function stabTimes(user, character2, move){ for (let i = 0; i < roll; i++){
+// stabCalc(user, character2, move)
+// };
+// console.log(`${character2.hp}/${character2.maxhp}`)
+// };
 
-stabTimes(human, enemy, stab);
+// stabTimes(human, enemy, stab);
 //------------------------------------------Turn Based Logic-------------------------------------//
 let enemyAttack
 let playerAttack
@@ -174,8 +174,8 @@ function playerAtk(){
     };
 
 let playerturn = true;
+
 function turnCycle(user, enemy){ 
-    const turn = setInterval(() => {
     // If either character is not alive, end the game
     if (!user.isAlive()) {
       clearInterval(turn);
@@ -193,7 +193,12 @@ function turnCycle(user, enemy){
     console.log('---------------------------------------------')
     // Switch turns
     playerturn = !playerturn;
-  }, 2000);
 }
 
-turnCycle(human, enemy)
+const move_1 = document.querySelector('#user-button-1');
+const attack_1 = document.querySelector('#attack-1').innerHTML;
+
+move_1.addEventListener('click', function(){
+    console.log(attack_1)
+})
+

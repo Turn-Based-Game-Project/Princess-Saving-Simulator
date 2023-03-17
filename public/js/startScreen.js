@@ -38,7 +38,7 @@ const sceneLoader = (currentScene) => {
     magicianButton.hidden = true;
     elfButton.hidden = true;
     const startScreen = new Image();
-      startScreen.src = 'game-sprites/startScreen.png';
+      startScreen.src = '/sprites/startScreen.png';
       startScreen.onload = () => {
         canvas.width = startScreen.width;
         canvas.height = startScreen.height
@@ -72,7 +72,7 @@ const sceneLoader = (currentScene) => {
       ctx.fillText('Choose your adventurer!', 120,100);
     
       const dwarfChar = new Image();
-      dwarfChar.src = ('./game-sprites/dwarf-model.png');
+      dwarfChar.src = ('/sprites/dwarf-model.png');
       dwarfChar.onload = () => {
         ctx.drawImage(dwarfChar, 80, 150, canvas.width/4,canvas.height/4);
         ctx.fillStyle = 'black';
@@ -87,7 +87,7 @@ const sceneLoader = (currentScene) => {
 
     
       const elfChar = new Image();
-      elfChar.src = ('./game-sprites/elf-model.png');
+      elfChar.src = ('/sprites/elf-model.png');
       elfChar.onload = () => {
         ctx.drawImage(elfChar, 300, 150, canvas.width/4,canvas.height/4);
         ctx.fillStyle = 'black';
@@ -101,7 +101,7 @@ const sceneLoader = (currentScene) => {
       })
     
       const magicChar = new Image();
-      magicChar.src = ('./game-sprites/wizard-model.png');
+      magicChar.src = ('/sprites/wizard-model.png');
       magicChar.onload = () => {
         ctx.drawImage(magicChar, 180, 150, canvas.width/4,canvas.height/4);
         ctx.fillStyle = 'black';

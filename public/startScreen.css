@@ -6,6 +6,8 @@
     background: #eee;
     display: block;
     margin: 0 auto;
+    height: 100%;
+    width: 100%;
   }
 
   card {
@@ -23,17 +25,32 @@
     position: absolute;
     z-index: 1;
     color: red;
-    margin-top: 310px;
+    margin-top: 550px;
+    font-size: x-large;
+  }
+
+  #start {
+    font-size: 60px;
+    margin-left: 710px;
+    margin-top: 450px;
   }
 
   #dwarfSelect {
-    margin-left: 50px;
+    margin-left: 340px;
   }
 
   #magicianSelect {
-    margin-left: 150px;
+    margin-left: 270px;
+    margin-left: 700;
   }
 
   #elfSelect {
-    margin-left: 275px;
+    margin-left: 1050px;
+  }
+
+  #Desc {
+    margin-left: 400px;
+    margin-top: 700px;
+    font-size: xx-large;
+    padding-top: 2%;
   }

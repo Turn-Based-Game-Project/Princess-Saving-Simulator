@@ -23,7 +23,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 app.use(express.static(path.join(__dirname, 'public')));
 
+const sess = {
+  secret: 'Placeholder',
+  cookie: {
+    maxAge: 60 * 60 * 24 * 3,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
 
+app.use(session(sess));
 
 
 sequelize.sync({ force: false }).then(() => {

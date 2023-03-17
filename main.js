@@ -1,18 +1,22 @@
-// const move_1 = document.querySelector('#mash');
-// const enemy_move_1 = document.querySelector('#em1')
-
-// move_1.addEventListener("click", function() {
-//     getInput(move_1.innerText);
-//   });
-
-// enemy_move_1.addEventListener("click", function() {
-//     getInput(enemy_move_1.innerText);
-//   });
+const hello = require('./attack-js/engine.js')
 
 
-// function getInput(value) {
-//     console.log("Clicked button with value: " + value.toLowerCase());
-// }
+const move_1 = document.querySelector('#mash');
+const enemy_move_1 = document.querySelector('#em1');
+
+
+
+move_1.addEventListener("click", hello.hello());
+
+
+enemy_move_1.addEventListener("click", function() {
+    getInput(enemy_move_1.innerText);
+  });
+
+
+function getInput(value) {
+    console.log("Clicked button with value: " + value.toLowerCase());
+}
 
 
 const img = new Image();

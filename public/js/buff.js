@@ -1,5 +1,5 @@
-const { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck } = require('./checks')
-const { stab } = require('./attack_variables')
+import { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck } from '/js/checks.js'
+
 
 
 function stoneArmorCalc(user){
@@ -61,6 +61,13 @@ function lifesiphonCalc(user, character2, damage){
     console.log('Dorgon steals some of your life force!')
 }
 
+const roll = 2
+function stabTimes(user, character2, move){ for (let i = 0; i < roll; i++){
+stabCalc(user, character2, move)
+};
+console.log(`${character2.hp}/${character2.maxhp}`)
+};
+
 function stabCalc(user, character2, move){
     let stabDamage
     stabDamage = damageRoll(move);
@@ -75,4 +82,4 @@ function stabCalc(user, character2, move){
             character2.hp -= stabDamage 
 }
 
-module.exports = {healCalc, stoneArmorCalc, divineIntervention, attack_elixirCalc, lifesiphonCalc, stabCalc}
+export {healCalc, stoneArmorCalc, divineIntervention, attack_elixirCalc, lifesiphonCalc, stabCalc}

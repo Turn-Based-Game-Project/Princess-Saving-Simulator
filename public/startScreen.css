@@ -41,7 +41,7 @@
 
   #magicianSelect {
     margin-left: 600px;
-    margin-left: 1000;
+
   }
 
   #elfSelect {
@@ -49,8 +49,11 @@
   }
 
   #Desc {
+    color: black;
     margin-left: 400px;
-    margin-top: 700px;
-    font-size: xx-large;
+    margin-top: 1500px;
+    font-size: 100px;
     padding-top: 2%;
+    position: absolute;
+    z-index: 1;
   }

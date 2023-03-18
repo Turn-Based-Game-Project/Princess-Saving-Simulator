@@ -17,7 +17,7 @@ User.init(
         },
       user_name: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: true,
         validate: {
           isAlphanumeric: true,

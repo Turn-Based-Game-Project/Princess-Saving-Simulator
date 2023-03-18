@@ -298,8 +298,8 @@ reset_button.addEventListener('click', () => {
 });
 
 const move_1 = document.querySelector('#user-button-1');
-const attack_1 = document.querySelector('#attack-1')
-attack_1.textContent = human.move_1.name
+const attack_1 = document.querySelector('#attack-1');
+// attack_1.textContent = human.move_1.name
 move_1.addEventListener('click', () => {
     console.log(attack_1.textContent)
     switch(attack_1.textContent){
@@ -309,7 +309,7 @@ move_1.addEventListener('click', () => {
     case 'Fireball':
     turnCycle(human, enemy, fireball)
     break;
-    case 'Fire arrow':
+    case 'Fire Arrow':
     turnCycle(human, enemy, fire_arrow)
     break
 }
@@ -350,6 +350,7 @@ move_3.addEventListener('click', () => {
 };
 });
 
+
 const move_4 = document.querySelector('#user-button-4');
 const attack_4 = document.querySelector('#attack-4');
 attack_4.textContent = human.move_4.name
@@ -386,4 +387,4 @@ const enemy_hp = document.querySelector('#enemy-hp');
 enemy_hp.textContent = enemy.hp
 
 const enemy_maxhp = document.querySelector('#enemy-max-hp')
-enemy_maxhp.textContent = enemy.maxhp
+enemy_maxhp.textContent = enemy.maxhp;

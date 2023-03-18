@@ -13,12 +13,11 @@ const magicianButton = document.getElementById('magicianSelect');
 const elfButton = document.getElementById('elfSelect');
 const charDesc = document.getElementById('Desc');
 const startButton = document.getElementById('start');
+
 var currentScene;
 
 const attack_1 = document.querySelector('#attack-1')
       console.log(attack_1)
-
-
 
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -82,9 +81,18 @@ const sceneLoader = (currentScene) => {
         ctx.fillText('Dwarf', 110, 300);
       
       };
-      dwarfButton.addEventListener('mouseover', () => {
-        charDesc.hidden = false;
-        charDesc.textContent = "A mighty dwarf equipped with a devastating warhammer";
+
+
+      
+      // dwarfButton.addEventListener('mouseover', () => {
+      //   charDesc.hidden = false;
+      //   charDesc.textContent = "A mighty dwarf equipped with a devastating warhammer";
+      // })
+
+      const attack_1 = document.querySelector('#attack-1')
+      console.log(attack_1)
+      dwarfButton.addEventListener('click', () => {
+        console.log(attack_1)
       })
 
     

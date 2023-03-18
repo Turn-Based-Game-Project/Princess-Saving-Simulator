@@ -1,13 +1,13 @@
-const canvas = document.getElementById("myCanvas");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-canvas.style.position = 'absolute';
-canvas.style.top = '0';
-canvas.style.left = '0';
-document.body.appendChild(canvas);
-const ctx = canvas.getContext("2d");
-const width = canvas.width = 1000;
-const height = canvas.height = 1000;
+// const canvas = document.getElementById("myCanvas");
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+// canvas.style.position = 'absolute';
+// canvas.style.top = '0';
+// canvas.style.left = '0';
+// document.body.appendChild(canvas);
+// const ctx = canvas.getContext("2d");
+// const width = canvas.width = 1000;
+// const height = canvas.height = 1000;
 const dwarfButton = document.getElementById("dwarfSelect");
 const magicianButton = document.getElementById('magicianSelect');
 const elfButton = document.getElementById('elfSelect');
@@ -16,71 +16,69 @@ const startButton = document.getElementById('start');
 
 var currentScene;
 
-const attack_1 = document.querySelector('#attack-1')
-      console.log(attack_1)
 
-ctx.fillStyle = 'black';
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+// ctx.fillStyle = 'black';
+// ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
-const sceneLoader = (currentScene) => {
-  if (currentScene === 'start'){
-    startScene();
-  } else if(currentScene === 'character') {
-    charScene();
-  } else{
-    gameScene();
-  }
-}
+// const sceneLoader = (currentScene) => {
+//   if (currentScene === 'start'){
+//     startScene();
+//   } else if(currentScene === 'character') {
+//     charScene();
+//   } else{
+//     gameScene();
+//   }
+// }
 
-  const startScene = () => {
-    charDesc.hidden = true;
-    dwarfButton.hidden = true;
-    magicianButton.hidden = true;
-    elfButton.hidden = true;
-    const startScreen = new Image();
-      startScreen.src = '/sprites/startScreen.png';
-      startScreen.onload = () => {
-        canvas.width = startScreen.width;
-        canvas.height = startScreen.height
-        ctx.drawImage(startScreen, 0, 0, canvas.width, canvas.height);
-      }
+//   const startScene = () => {
+//     charDesc.hidden = true;
+//     dwarfButton.hidden = true;
+//     magicianButton.hidden = true;
+//     elfButton.hidden = true;
+//     const startScreen = new Image();
+//       startScreen.src = '/sprites/startScreen.png';
+//       startScreen.onload = () => {
+//         canvas.width = startScreen.width;
+//         canvas.height = startScreen.height
+//         ctx.drawImage(startScreen, 0, 0, canvas.width, canvas.height);
+//       }
       
 
-      startButton.addEventListener('click', () => {
-        sceneLoader('character');
-        dwarfButton.hidden = false;
-        magicianButton.hidden = false;
-        elfButton.hidden = false;
-        startButton.hidden = true;
-      });
+//       startButton.addEventListener('click', () => {
+//         sceneLoader('character');
+//         dwarfButton.hidden = false;
+//         magicianButton.hidden = false;
+//         elfButton.hidden = false;
+//         startButton.hidden = true;
+//       });
     
 
       
-  }
+//   }
 
   
-    function charScene(){
+//     function charScene(){
 
 
-      ctx.clearRect(0,0, canvas.width, canvas.height);
+//       ctx.clearRect(0,0, canvas.width, canvas.height);
     
-      ctx.fillStyle = 'lightblue';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+//       ctx.fillStyle = 'lightblue';
+//       ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-      ctx.fillStyle = 'black'; 
-      ctx.font = '24px Arial';
-      ctx.fillText('Choose your adventurer!', 120,100);
+//       ctx.fillStyle = 'black'; 
+//       ctx.font = '24px Arial';
+//       ctx.fillText('Choose your adventurer!', 120,100);
     
-      const dwarfChar = new Image();
-      dwarfChar.src = ('/sprites/dwarf-model.png');
-      dwarfChar.onload = () => {
-        ctx.drawImage(dwarfChar, 80, 150, canvas.width/4,canvas.height/4);
-        ctx.fillStyle = 'black';
-        ctx.font = '24px Arial';
-        ctx.fillText('Dwarf', 110, 300);
+//       const dwarfChar = new Image();
+//       dwarfChar.src = ('/sprites/dwarf-model.png');
+//       dwarfChar.onload = () => {
+//         ctx.drawImage(dwarfChar, 80, 150, canvas.width/4,canvas.height/4);
+//         ctx.fillStyle = 'black';
+//         ctx.font = '24px Arial';
+//         ctx.fillText('Dwarf', 110, 300);
       
-      };
+//       };
 
 
       
@@ -123,8 +121,6 @@ const sceneLoader = (currentScene) => {
         charDesc.hidden = false;
         charDesc.textContent = "A magician with ancient powers and a powerful wand";
       })
-  
-    }
     
 
 

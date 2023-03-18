@@ -10,16 +10,14 @@
     width: 100%;
   }
 
-  .card {
+  card {
     position: absolute;
     z-index: 1;
     margin-top: 350px;
     background-color: white;
   }
 
-  #Desc {
-    margin-left: 50px;
-  }
+
 
   .select-button {
     position: absolute;
@@ -41,7 +39,7 @@
 
   #magicianSelect {
     margin-left: 600px;
-    margin-left: 1000;
+
   }
 
   #elfSelect {

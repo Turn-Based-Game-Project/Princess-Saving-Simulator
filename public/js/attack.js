@@ -1,4 +1,4 @@
- export const attack = {
+const attack = {
     mash: {
         name: 'Mash',
         attack: 5,
@@ -7,7 +7,7 @@
         description: 'User mashes the opponent with average damage.'
     },
     charge: {
-        name: 'charge',
+        name: 'Charge',
         attack: 100,
         crit: 0,
         type: 'attack',
@@ -57,7 +57,7 @@
     },
     fireball:{
         name:'Fireball',
-        attack: 8,
+        attack: 18,
         crit: 0.15,
         type: 'attack',
         description: 'The user hurls a fireball at the opponent. Deals moderate damage.'
@@ -163,4 +163,6 @@
     },
 
 }
+
+export default attack;
 

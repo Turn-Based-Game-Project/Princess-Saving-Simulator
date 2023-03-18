@@ -10,7 +10,7 @@
     width: 100%;
   }
 
-  card {
+  .card {
     position: absolute;
     z-index: 1;
     margin-top: 350px;
@@ -21,7 +21,7 @@
     margin-left: 50px;
   }
 
-  button {
+  .select-button {
     position: absolute;
     z-index: 1;
     color: red;

@@ -10,16 +10,14 @@
     width: 100%;
   }
 
-  .card {
+  card {
     position: absolute;
     z-index: 1;
     margin-top: 350px;
     background-color: white;
   }
 
-  #Desc {
-    margin-left: 50px;
-  }
+
 
   .select-button {
     position: absolute;
@@ -49,11 +47,8 @@
   }
 
   #Desc {
-    color: black;
     margin-left: 400px;
-    margin-top: 1500px;
-    font-size: 100px;
+    margin-top: 700px;
+    font-size: xx-large;
     padding-top: 2%;
-    position: absolute;
-    z-index: 1;
   }

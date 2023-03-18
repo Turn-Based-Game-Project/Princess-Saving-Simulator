@@ -81,10 +81,8 @@ const sceneLoader = (currentScene) => {
       
       };
       dwarfButton.addEventListener('mouseover', () => {
-    
-        ctx.fillStyle = 'black';
-        ctx.font = "14px Arial";
-        ctx.fillText("A mighty dwarf equipped with a devastating warhammer", 50, 50);
+        charDesc.hidden = false;
+        charDesc.textContent = "A mighty dwarf equipped with a devastating warhammer";
       })
 
     
@@ -98,10 +96,8 @@ const sceneLoader = (currentScene) => {
       };
 
       elfButton.addEventListener('mouseover', () => {
-        ctx.clearRect(50,50)
-        ctx.fillStyle = 'black';
-        ctx.font = "14px Arial";
-        ctx.fillText("A noble elf with great bow skills", 50, 50);
+        charDesc.hidden = false;
+        charDesc.textContent = "A noble elf with great bow skills";
       })
     
       const magicChar = new Image();

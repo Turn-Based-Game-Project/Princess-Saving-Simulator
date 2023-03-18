@@ -7,8 +7,10 @@ html{
 
 .background{
     position: absolute;
-    width: 99vw;
-    height: 96vh;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
     background-image: url('../sprites/RK6Tqo.png');
     background-size: cover;
     background-position: center;
@@ -134,5 +136,28 @@ html{
     justify-content: center;
     align-items: center;
     height: 70%;
+}
+
+.reset {
+    position: absolute;
+    display: none;
+    bottom: 150px;
+    left: 600px;
+    width: 700px;
+    height: 200px;
+}
+
+.reset-button{
+    background-color: rgb(115, 148, 240);
+    width: 49%;
+    height: 50%;
+    border: 2px solid #565656;
+    border-radius: 8px;
+ 
+}
+
+.reset-button:hover{
+    cursor: pointer;
+    background-color: rgb(153, 174, 230) 
 }
 

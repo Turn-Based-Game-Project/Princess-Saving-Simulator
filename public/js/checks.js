@@ -1,3 +1,5 @@
+import { healCalc, blockCalc } from './buff.js'
+
 function buffCheck(user, move, character2){
     switch (move.name){
         case 'Stone Armor':
@@ -9,6 +11,8 @@ function buffCheck(user, move, character2){
         case 'Divine Intervention':
             divineIntervention(user, character2);
             break;
+        case 'Block':
+            blockCalc(user);
         default:
             break
     }

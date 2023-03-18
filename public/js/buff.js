@@ -1,16 +1,20 @@
 import { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck } from '/js/checks.js'
 
-
+const dialogue = document.querySelector('.dialogue');
 
 function stoneArmorCalc(user){
     user.defense += 5
-    console.log(`${user.id} used Stone Armor.`)
-    console.log(`${user.id}\'s defense increased sharply.`)
+    dialogue.textContent = `${user.id} used Stone Armor.`
+    dialogue.textContent = `${user.id}\'s defense increased sharply.`
 };
 
 function blockCalc(user){
     user.defense += 1000;
-    //how to get defense back to the original//
+    dialogue.textContent = `${user.id} used Stone Armor.`
+    dialogue.textContent += `\n${user.id}\'s will block the next attack.`
+    setTimeout(function(){
+        user.defense -= 1000;
+    }, 3000)
 
 };
 
@@ -29,8 +33,8 @@ function healCalc(user){
     if(user.hp > user.maxhp){
         user.hp = user.maxhp
     }
-    console.log(`${user.id} used Heal.`)
-    console.log(`${user.id} healed! ${user.hp}/${user.maxhp}`)
+    dialogue.textContent = `${user.id} used Heal.`
+    dialogue.textContent = `${user.id} healed! ${user.hp}/${user.maxhp}`
 };
 
 function divineIntervention(user, character2){
@@ -58,14 +62,14 @@ function lifesiphonCalc(user, character2, damage){
     if (user.hp > user.maxhp){
         user.hp = user.maxhp
     }
-    console.log('Dorgon steals some of your life force!')
+    dialogue.textContent = 'Dorgon steals some of your life force!'
 }
 
 const roll = 2
 function stabTimes(user, character2, move){ for (let i = 0; i < roll; i++){
 stabCalc(user, character2, move)
 };
-console.log(`${character2.hp}/${character2.maxhp}`)
+dialogue.textContent = `${character2.hp}/${character2.maxhp}`
 };
 
 function stabCalc(user, character2, move){
@@ -75,11 +79,11 @@ function stabCalc(user, character2, move){
 
     if (crit > .80){
         let critDamage = critCalc(stabDamage)
-        console.log(`${user.id} used Stab and did ${critDamage} damage!`)
+        dialogue.textContent = `${user.id} used Stab and did ${critDamage} damage!`
         character2.hp -= critDamage
 
-        }   console.log(`${user.id} used Stab and did ${stabDamage} damage!`)
+        }   dialogue.textContent = `${user.id} used Stab and did ${stabDamage} damage!`
             character2.hp -= stabDamage 
 }
 
-export {healCalc, stoneArmorCalc, divineIntervention, attack_elixirCalc, lifesiphonCalc, stabCalc}
+export {healCalc, stoneArmorCalc, blockCalc, divineIntervention, attack_elixirCalc, lifesiphonCalc, stabCalc}

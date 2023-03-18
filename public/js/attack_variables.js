@@ -1,4 +1,4 @@
-import * as attack from '/js/attack.js';
+import attack from '/js/attack.js';
 
 const mash = attack.mash;
 const charge = attack.charge;

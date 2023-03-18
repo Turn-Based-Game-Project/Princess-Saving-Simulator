@@ -5,20 +5,14 @@ const { User } = require('../../models/User');
 router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
-      user_name: req.body.user_name,
       email: req.body.email,
       password: req.body.password,
     });
     res.status(200).json("User created successfully!");
-    process.exit();
-
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
-});
-
-router.get('/login', async (req, res) => {
 });
 
 

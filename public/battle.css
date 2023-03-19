@@ -22,8 +22,8 @@ html{
     width: 600px;
     height: 100px;
     border: 1px solid #111;
-    left: 470px;
-    top: 50px;
+    left: 38.5vw;
+    top: 5vh;
     background-color: rgb(115, 148, 240);
     border: 2px solid #565656;
     border-radius: 8px;
@@ -35,7 +35,6 @@ html{
     width: 200px;
     bottom: 300px;
     left: 150px;
-    background-image: url("/sprites/dwarf-model.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -97,8 +96,8 @@ html{
     flex-wrap: wrap;
     width: 700px;
     height: 200px;
-    bottom: 50px;
-    right: 415px;
+    bottom: 10vh;
+    right: 28vw;
     justify-content: space-between;
 }
 
@@ -160,4 +159,89 @@ html{
     cursor: pointer;
     background-color: rgb(153, 174, 230) 
 }
+
+.char-select-background{
+    position: absolute;
+    height: 101%;
+    width: 101%;
+    z-index: 1;
+    background-color: #111;
+}
+
+.fighter-select{
+    position: absolute;
+    color: #fff;
+    font-size: 4vh;
+    top: 20vh;
+    left: 36vw;
+    z-index: 2;
+
+}
+
+.dwarf-button{
+    position: absolute;
+    top: 40vh;
+    left: 35vw;
+    background-color: #c82222;
+    background-image: url('/sprites/dwarf-model.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 2px solid #111;
+    border-radius: 50px;
+    width: 100px;
+    height: 200px;
+    z-index: 2;
+}
+
+.dwarf-button:hover{
+    cursor: pointer;
+    background-color: #c24343;
+    transform: scale(1.3, 1.3)
+}
+
+.wizard-button1{
+    position: absolute;
+    top: 40vh;
+    left: 48.5vw;
+    background-color: rgb(221, 236, 16);
+    background-image: url('/sprites/wizard-model.png');
+    background-position: -30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 2px solid #111;
+    border-radius: 50px;
+    width: 100px;
+    height: 200px;
+    z-index: 2;
+}
+
+.wizard-button1:hover{
+    cursor: pointer;
+    background-color: rgb(211, 218, 117);
+    transform: scale(1.3, 1.3)
+}
+
+.elf-button2{
+    position: absolute;
+    top: 40vh;
+    left: 62vw;
+    background-color: rgb(18, 52, 204);
+    background-image: url('/sprites/elf-model.png');
+    background-position: -20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 2px solid #111;
+    border-radius: 50px;
+    width: 100px;
+    height: 200px;
+    z-index: 2;
+}
+
+.elf-button2:hover{
+    cursor: pointer;
+    background-color: rgb(75, 99, 204);
+    transform: scale(1.3, 1.3)
+}
+
+
 

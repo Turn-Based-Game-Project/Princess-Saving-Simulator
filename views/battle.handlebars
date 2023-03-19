@@ -1,3 +1,5 @@
+<div class="char-select-background"></div>
+<div class="fighter-select">꧁༺ Choose your adventurer ༻꧂</div>
 <div class="background">
 </div>
 <div class="container">
@@ -19,30 +21,32 @@
     <div class="moves">
         <button class="move-1 move" id="user-button-1">
             <p class="attack" id="attack-1"></p>
-            <p class="description" id="description-1">User mashes the opponent with average damage.</p>
+            <p class="description" id="description-1"></p>
         </button>
         <button class="move-2 move" id="user-button-2">
             <p class="attack" id="attack-2"></p>
-            <p class="description" id="description-2">User stabs the opponent. This hits 2-5 times.</p>
+            <p class="description" id="description-2"></p>
         </button>
         <button class="move-3 move" id="user-button-3">
             <p class="attack" id="attack-3"> </p>
-            <p class="description" id="description-3">Sharply increases the user's defense.</p>
+            <p class="description" id="description-3">.</p>
         </button>
         <button class="move-4 move" id="user-button-4">
             <p class="attack" id="attack-4"></p>
-            <p class="description" id="description-4">Increases HP by 35.</p></div>
+            <p class="description" id="description-4"> </p></div>
         </button>
     </div>
 </div>
 <div class="reset">
 <button class="reset-button">Try Again?</button>
 </div>
-
-<script src="/js/startScreen.js"></script>
+<div class="dwarf-button"></div>
+<div class="wizard-button1"></div>
+<div class="elf-button2"></div>
 <script src="/js/checks.js" type="module"></script>
 <script src="/js/buff.js" type="module"></script>
 <script src="/js/attack.js" type="module"></script>
 <script src="/js/attack_variables.js" type="module"></script>
 <script src="/js/engine.js" type="module"></script>
-<script src="/js/startScreen.js"></script>
+<script>window.classes = {{{print_object classes}}}</script>
+<script>window.enemies= {{{print_object enemies}}}</script>

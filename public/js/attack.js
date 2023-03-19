@@ -8,10 +8,10 @@ const attack = {
     },
     charge: {
         name: 'Charge',
-        attack: 100,
+        attack: 30,
         crit: 0,
-        type: 'attack',
-        description: 'User does massive damage but must wait 1 turn to act again.'
+        type: 'special',
+        description: 'User does fixed damage and increases your attack, but drops your defense drastically.'
     },
     stone_armor:{
         name: 'Stone Armor',
@@ -29,7 +29,7 @@ const attack = {
     },
     fire_arrow: {
         name: 'Fire Arrow',
-        attack: 12,
+        attack: 10,
         crit: 0.3,
         type: 'attack',
         description: 'User shoots a fire arrow at the opponent. High critical chance.'
@@ -69,15 +69,15 @@ const attack = {
         type: 'special',
         description: 'The user simply hits the opponent with a wand to do mediorce damage. Or does it...?'
     },
-    heal:{
-        name: 'Heal',
+    ice_wall:{
+        name: 'Ice Wall',
         attack: 0,
         crit: 0,
         type: 'buff',
-        description: 'Increases HP by 35.'
+        description: 'Shields the User in a block of ice, increaseing HP by 15 and slightly raises defense.'
     },
     invisibilty:{
-        name:'invisibilty',
+        name:'Invisibilty',
         attack: 0,
         crit: 0,
         type:'buff',
@@ -107,14 +107,14 @@ const attack = {
     },
     leer:{
         name: 'Leer',
-        attack: 1,
-        crit: 1,
-        type: 'attack',
-        description: 'User stares menacingly at the opponent. This move always crits. Menacingly.'
+        attack: 0,
+        crit: 0,
+        type: 'buff',
+        description: 'User stares menacingly at the opponent, lowering their defense menacingly.'
     },
     scratch:{
         name: 'Scratch',
-        attack: 5,
+        attack: 15,
         crit: 1,
         type: 'attack',
         description: 'User scratches the opponent, dealing light damage. This move always crits.'
@@ -124,11 +124,11 @@ const attack = {
         attack: 0,
         crit: 0,
         type: 'buff',
-        description: 'User cries and the opponent feels bad, allowing the user a free turn.'
+        description: 'User cries and the opponent feels bad, lower the opponent\'s attack.'
     },
     kick:{
         name: 'Kick',
-        attack: 5,
+        attack: 12,
         crit: 1,
         type: 'attack',
         description: 'User gains courage and delivers a devastating kick. This move always crits.'

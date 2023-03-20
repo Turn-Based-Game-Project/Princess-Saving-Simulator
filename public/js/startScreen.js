@@ -14,14 +14,10 @@ const elfButton = document.getElementById('elfSelect');
 const charDesc = document.getElementById('Desc');
 const startButton = document.getElementById('start');
 
+
 var currentScene;
-
-const attack_1 = document.querySelector('#attack-1')
-      console.log(attack_1)
-
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
-
 
 const sceneLoader = (currentScene) => {
   if (currentScene === 'start'){
@@ -29,7 +25,7 @@ const sceneLoader = (currentScene) => {
   } else if(currentScene === 'character') {
     charScene();
   } else{
-    gameScene();
+    console.log('hi')
   }
 }
 
@@ -81,18 +77,9 @@ const sceneLoader = (currentScene) => {
         ctx.fillText('Dwarf', 110, 300);
       
       };
-
-
-      
-      // dwarfButton.addEventListener('mouseover', () => {
-      //   charDesc.hidden = false;
-      //   charDesc.textContent = "A mighty dwarf equipped with a devastating warhammer";
-      // })
-
-      const attack_1 = document.querySelector('#attack-1')
-      console.log(attack_1)
-      dwarfButton.addEventListener('click', () => {
-        console.log(attack_1)
+      dwarfButton.addEventListener('mouseover', () => {
+        charDesc.hidden = false;
+        charDesc.textContent = "A mighty dwarf equipped with a devastating warhammer";
       })
 
     
@@ -125,59 +112,8 @@ const sceneLoader = (currentScene) => {
       })
   
     }
-    
-
-
-// Event Listeners for Character Presets
-
-dwarfButton.addEventListener("click", function () {
-  const hp = document.getElementById("user-hp");
-  const max_hp = document.getElementById("user-max-hp");
-  const move_1 = document.getElementById("attack-1");
-  const move_2 = document.getElementById("attack-2");
-  const move_3 = document.getElementById("attack-3");
-  const move_4 = document.getElementById("attack-4");
-
-  hp.innerHTML="{{ classes.[0].hp} }";
-  max_hp.innerHTML="{{ classes.[0].max_hp }}";
-  move_1.innerHTML="{{ classes.[0].move_1 }}";
-  move_2.innerHTML="{{ classes.[0].move_2 }}";
-  move_3.innerHTML="{{ classes.[0].move_3 }}";
-  move_4.innerHTML="{{ classes.[0].move_4 }}";
-});
-
-elfButton.addEventListener("click", function () {
-  const hp = document.getElementById("user-hp");
-  const max_hp = document.getElementById("user-max-hp");
-  const move_1 = document.getElementById("attack-1");
-  const move_2 = document.getElementById("attack-2");
-  const move_3 = document.getElementById("attack-3");
-  const move_4 = document.getElementById("attack-4");
-
-  hp.innerHTML="{{ classes.[1].hp} }";
-  max_hp.innerHTML="{{ classes.[1].max_hp }}";
-  move_1.innerHTML="{{ classes.[1].move_1 }}";
-  move_2.innerHTML="{{ classes.[1].move_2 }}";
-  move_3.innerHTML="{{ classes.[1].move_3 }}";
-  move_4.innerHTML="{{ classes.[1].move_4 }}";
-});
-
-magicianButton.addEventListener("click", function () {
-  const hp = document.getElementById("user-hp");
-  const max_hp = document.getElementById("user-max-hp");
-  const move_1 = document.getElementById("attack-1");
-  const move_2 = document.getElementById("attack-2");
-  const move_3 = document.getElementById("attack-3");
-  const move_4 = document.getElementById("attack-4");
-
-  hp.innerHTML="{{ classes.[2].hp} }";
-  max_hp.innerHTML="{{ classes.[2].max_hp }}";
-  move_1.innerHTML="{{ classes.[2].move_1 }}";
-  move_2.innerHTML="{{ classes.[2].move_2 }}";
-  move_3.innerHTML="{{ classes.[2].move_3 }}";
-  move_4.innerHTML="{{ classes.[2].move_4 }}";
-});
-
+  
+  console.log(window)
 
 
 sceneLoader('start');

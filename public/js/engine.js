@@ -1,4 +1,4 @@
-import { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, heal, invisibilty, chop, bite, rage, leer, scratch, cry, kick, scourge, lifesiphon, ultima, divine_intervention } from '/js/attack_variables.js';
+import { mash, charge, stone_armor, block, fire_arrow, stab, attack_elixir, dodge, fireball, wand_smack, ice_wall, invisibilty, chop, bite, rage, leer, scratch, cry, kick, scourge, lifesiphon, ultima, divine_intervention } from '/js/attack_variables.js';
 import { healCalc, stoneArmorCalc, lifesiphonCalc, stabCalc} from '/js/buff.js';
 import { calculateHP, damageRoll, critCalc, critChance, specialCheck, buffCheck } from '/js/checks.js';
 
@@ -37,9 +37,12 @@ class User {
     }
 }
 
-const human = new User('Mariop', 100, 100, 20, 5, mash, charge, heal, block)
-const enemy = new User('Dorgon', 150, 150, 12, 8, scourge, lifesiphon, ultima, divine_intervention)
-
+const dwarf = new User('Hero', window.classes[0].hp, window.classes[0].max_hp, window.classes[0].attack + 10, window.classes[0].defense, window.classes[0].move_1, window.classes[0].move_2, window.classes[0].move_3, window.classes[0].move_4);
+const elf = new User('Hero',window.classes[1].hp, window.classes[1].max_hp, window.classes[1].attack + 4, window.classes[1].defense - 2, window.classes[1].move_1, window.classes[1].move_2, window.classes[1].move_3, window.classes[1].move_4);
+const wizard = new User('Hero',window.classes[2].hp, window.classes[2].max_hp, window.classes[2].attack + 10, window.classes[2].defense, window.classes[2].move_1, window.classes[2].move_2, window.classes[2].move_3, window.classes[2].move_4);
+const goblin = new User('Orc', window.enemies[0].hp, window.enemies[0].max_hp, window.enemies[0].attack, window.enemies[0].defense, window.enemies[0].move_1, window.enemies[0].move_2, window.enemies[0].move_3, window.enemies[0].move_4);
+const orc = new User('Goblin',  window.enemies[1].hp, window.enemies[1].max_hp, window.enemies[1].attack, window.enemies[1].defense, window.enemies[1].move_1, window.enemies[1].move_2, window.enemies[1].move_3, window.enemies[1].move_4);
+const dragon = new User('Dargon',  window.enemies[2].hp, window.enemies[2].max_hp, window.enemies[2].attack, window.enemies[2].defense, window.enemies[2].move_1, window.enemies[2].move_2, window.enemies[2].move_3, window.enemies[2].move_4);
 
 User.prototype.isAlive = function () {
     if (this.hp > 0) {
@@ -51,19 +54,9 @@ User.prototype.isAlive = function () {
 
 //---------------------Attack Function-------------------------------------------------------------------//
 User.prototype.userAttack = function (character2, move) {
-    //--------------------Visual Aid---------------------//
-    // if(this.id === 'Mariop'){
-    //     character2.id = `${color.red}${character2.id}${color.reset}`
-    //     this.id = `${color.green}${this.id}${color.reset}`
-    // } if (this.id === 'Dorgon'){
-    //     character2.id = `${color.green}${character2.id}${color.reset}`
-    //     this.id = `${color.red}${this.id}${color.reset}`
-    // }
     //---------------Value Variables---------------------//
     let finalDamage;
     let newHP;
-    //---------------------------------------------------//
-
 
     //--------------------Buff Check-----------------------//
     if (move.type === 'buff'){
@@ -80,7 +73,6 @@ User.prototype.userAttack = function (character2, move) {
         finalDamage = 0;
         newHP = calculateHP(character2, finalDamage)
         dialogue.textContent = `${this.id} used ${move.name} and had no effect!`
-        dialogue.textContent +=`\n ${character2.id} \nHP:${newHP}/${character2.maxhp}`
         return true;
     }   // Should activate on attacks with 0 damage after roll.
 
@@ -99,7 +91,6 @@ User.prototype.userAttack = function (character2, move) {
         newHP = calculateHP(character2, finalDamage)
     
         dialogue.textContent =`Critical Hit! ${this.id} used ${move.name} and inflicted an increased ${finalDamage} damage!\n`
-        dialogue.textContent +=`${character2.id} HP:${newHP}/${character2.maxhp}`
       
         return true
     }   
@@ -111,20 +102,10 @@ User.prototype.userAttack = function (character2, move) {
     newHP = calculateHP(character2, finalDamage)
 
     dialogue.innerText = `${this.id} used ${move.name} and inflicted ${finalDamage} damage!`
-    dialogue.innerText +=`\n${character2.id} HP:${newHP}/${character2.maxhp}`
 
     return true
 
 };
-
-// const roll = 2
-// function stabTimes(user, character2, move){ for (let i = 0; i < roll; i++){
-// stabCalc(user, character2, move)
-// };
-// console.log(`${character2.hp}/${character2.maxhp}`)
-// };
-
-// stabTimes(human, enemy, stab);
 //------------------------------------------Turn Based Logic-------------------------------------//
 let enemyAttack
 let playerAttack
@@ -132,7 +113,7 @@ let choice
 
 function enemyAtk(){
     choice = Math.floor(Math.random() * 4) 
-    enemyAttack = [scourge, fireball, ultima, mash]
+    enemyAttack = [leer, scratch, cry, kick]
     for(let i = 0; i < enemyAttack.length; i++){
     switch (choice){
         case 0:
@@ -152,7 +133,7 @@ function enemyAtk(){
 
 function playerAtk(){
         choice = Math.floor(Math.random() * 4) 
-        playerAttack = [heal, mash, fire_arrow, stab]
+        playerAttack = [ice_wall, mash, fire_arrow, stab]
         for(let i = 0; i < playerAttack.length; i++){
         switch (choice){
             case 0:
@@ -187,7 +168,13 @@ function enemydialogueText(user, enemy, move){
 
 
 function updateHP(user, enemy){
+    if (user_hp <= 0){
+        user_hp = 0
+    }
     user_hp.textContent = user.hp;
+    if (enemy_hp <= 0){
+        enemy_hp = 0
+    }
     enemy_hp.textContent = enemy.hp
     updateHPBar(user, enemy);
 };
@@ -258,7 +245,6 @@ function turnCycle(user, enemy, move){
     setTimeout(function() {
         enemy.userAttack(user, enemyAtk());
         updateHP(user, enemy);
-        move_box.style.display = 'block'
         if (!user.isAlive()) {
             dialogue.innerText = 'Game over!';
             move_box.style.display = 'none';
@@ -269,10 +255,15 @@ function turnCycle(user, enemy, move){
             dialogue.innerText = 'You won!';
             move_box.style.display = 'none';
             reset_box.style.display = 'block'
-                endText();
+            endText();
 
         }
-    }, 2000);
+    }, 3000);
+    setTimeout(function(){
+        move_box.style.display = 'block'
+        dialogue.textContent = 'What will you do next?'
+    }, 6000)
+    
     // Switch turns
     playerturn = !playerturn;
 };
@@ -280,10 +271,10 @@ function turnCycle(user, enemy, move){
 function endText(){
     setTimeout(function(){
         dialogue.innerText = 'Oh no, you\'ve beaten me!'
-    }, 1000);
+    }, 3000);
     setTimeout(function(){
         dialogue.innerText = 'I guess you win. '
-    }, 2000);
+    }, 6000);
 }
 
 // turnCycle(human, enemy, attack_test.mash)
@@ -297,94 +288,183 @@ reset_button.addEventListener('click', () => {
     resetGame(human, enemy)
 });
 
-const move_1 = document.querySelector('#user-button-1');
-const attack_1 = document.querySelector('#attack-1');
-// attack_1.textContent = human.move_1.name
-move_1.addEventListener('click', () => {
-    console.log(attack_1.textContent)
-    switch(attack_1.textContent){
-    case 'Mash':
-    turnCycle(human, enemy, mash)
-    break;
-    case 'Fireball':
-    turnCycle(human, enemy, fireball)
-    break;
-    case 'Fire Arrow':
-    turnCycle(human, enemy, fire_arrow)
-    break
-}
-})
-
-const move_2 = document.querySelector('#user-button-2');
-const attack_2 = document.querySelector('#attack-2')
-attack_2.textContent = human.move_2.name
-move_2.addEventListener('click', () => {
-    switch(attack_2.textContent){
-    case 'Charge':
-    turnCycle(human, enemy, charge)
-    break;
-    case 'Stab':
-    turnCycle(human, enemy, stab)
-    break;
-    case 'Wand smack':
-    turnCycle(human, enemy, wand_smack)
-    break
-};
-});
-
-const move_3 = document.querySelector('#user-button-3');
-const attack_3 = document.querySelector('#attack-3')
-attack_3.textContent = human.move_3.name
-move_3.addEventListener('click', () => {
-    console.log(attack_3)
-    switch(attack_3.textContent){
-    case 'Stone Armor':
-    turnCycle(human, enemy, stone_armor)
-    break;
-    case 'Attack Elixir':
-    turnCycle(human, enemy, attack_elixir)
-    break;
-    case 'Heal':
-    turnCycle(human, enemy, heal)
-    break
-};
-});
+const move_1 = document.querySelector('#user-button-1'); //Attack Box
+const attack_1 = document.querySelector('#attack-1'); //Attack Name
+const attack_1_desc = document.querySelector('#description-1')//Attack Description
 
 
-const move_4 = document.querySelector('#user-button-4');
-const attack_4 = document.querySelector('#attack-4');
-attack_4.textContent = human.move_4.name
-move_4.addEventListener('click', () => {
-    console.log(attack_4.textContent)
-    switch(attack_4.textContent){
-    case 'Block':
-    turnCycle(human, enemy, block)
-    break;
-    case 'Dodge':
-    turnCycle(human, enemy, dodge)
-    break;
-    case 'Invisibility':
-    turnCycle(human, enemy, invisibilty)
-    break
-};
-});
+const move_2 = document.querySelector('#user-button-2'); //Attack Box
+const attack_2 = document.querySelector('#attack-2'); //Attack Name
+const attack_2_desc = document.querySelector('#description-2')//Attack Description
+
+
+const move_3 = document.querySelector('#user-button-3'); //Attack Box
+const attack_3 = document.querySelector('#attack-3'); //Attack Name
+const attack_3_desc = document.querySelector('#description-3')//Attack Description
+
+
+const move_4 = document.querySelector('#user-button-4'); //Attack Box
+const attack_4 = document.querySelector('#attack-4'); //Attack Name
+const attack_4_desc = document.querySelector('#description-4')//Attack Description
 
 const dialogue_container = document.querySelector('.container');
-const dialogue = document.querySelector('.dialogue');
+const dialogue = document.querySelector('.dialogue'); //Dialogue Box
 
 //User Hp Bar and Info
 const user_hp_bar = document.querySelector('.user-hp-bar');
-const user_hp = document.querySelector('#user-hp');
-user_hp.textContent = human.hp
 
-const user_maxhp = document.querySelector('#user-max-hp')
-user_maxhp.textContent = human.maxhp
+const user_hp = document.querySelector('#user-hp'); //Left Number
+const user_maxhp = document.querySelector('#user-max-hp')//Right Number
 
 //Enemy Hp Bar and Info
 const enemy_hp_bar = document.querySelector('.enemy-hp-bar')
 
-const enemy_hp = document.querySelector('#enemy-hp');
-enemy_hp.textContent = enemy.hp
+const enemy_hp = document.querySelector('#enemy-hp');//Left Number
+const enemy_maxhp = document.querySelector('#enemy-max-hp');//Right Number
 
-const enemy_maxhp = document.querySelector('#enemy-max-hp')
-enemy_maxhp.textContent = enemy.maxhp;
+//---------------------------Add Event Listeners and Char Render-------------------------------------/
+const selectBtn = document.querySelector('.dwarf-button')
+const selectBtn1 = document.querySelector('.wizard-button1')
+const selectBtn2 = document.querySelector('.elf-button2')
+
+//---Dwarf Button
+selectBtn.addEventListener('click', function(){
+    const reset_button = document.querySelector('.reset-button')
+    reset_button.addEventListener('click', () => {
+    resetGame(dwarf, goblin)
+    });
+
+    enemy_hp.textContent = goblin.hp;
+    enemy_maxhp.textContent = goblin.maxhp;
+
+    const selectText = document.querySelector('.fighter-select')
+    const charBackground = document.querySelector('.char-select-background')
+    const char = document.querySelector('.character1')
+    char.style.backgroundImage = 'url(/sprites/dwarf-model.png)'
+    user_hp.innerHTML= window.classes[0].hp;
+    user_maxhp.innerHTML=window.classes[0].max_hp;
+
+    attack_1.innerHTML=window.classes[0].move_1;
+    attack_1_desc.textContent = mash.description;
+    move_1.addEventListener('click', function(){
+       turnCycle(dwarf, goblin, mash)
+    })
+
+    attack_2.innerHTML=window.classes[0].move_2;
+    attack_2_desc.textContent = charge.description;
+    move_2.addEventListener('click', function(){
+        turnCycle(dwarf, goblin, charge)
+     })
+
+    attack_3.innerHTML=window.classes[0].move_3;
+    attack_3_desc.textContent = stone_armor.description;
+    move_3.addEventListener('click', function(){
+        turnCycle(dwarf, goblin, stone_armor)
+     })
+
+    attack_4.innerHTML=window.classes[0].move_4;
+    attack_4_desc.textContent = block.description
+    move_4.addEventListener('click', function(){
+        turnCycle(dwarf, goblin, block)
+     })
+    
+    selectBtn.style.display = 'none';
+    selectBtn1.style.display = 'none';
+    selectBtn2.style.display = 'none';
+    charBackground.style.display = 'none';
+    selectText.style.display = 'none'
+})
+//---Wizard Button
+selectBtn1.addEventListener('click', function(){
+      const reset_button = document.querySelector('.reset-button')
+    reset_button.addEventListener('click', () => {
+    resetGame(wizard, goblin)
+    });
+    
+    enemy_hp.textContent = goblin.hp;
+    enemy_maxhp.textContent = goblin.maxhp;
+
+    const selectText = document.querySelector('.fighter-select')
+    const charBackground = document.querySelector('.char-select-background')
+    const char = document.querySelector('.character1')
+    char.style.backgroundImage = 'url(/sprites/wizard-model.png)'
+    user_hp.innerHTML= window.classes[2].hp;
+    user_maxhp.innerHTML= window.classes[2].max_hp;
+
+    attack_1.innerHTML=window.classes[2].move_1;
+    attack_1_desc.textContent = fireball.description;
+    move_1.addEventListener('click', function(){
+       turnCycle(wizard, goblin, fireball)
+    })
+
+    attack_2.innerHTML=window.classes[2].move_2;
+    attack_2_desc.textContent = wand_smack.description;
+    move_2.addEventListener('click', function(){
+        turnCycle(wizard, goblin, wand_smack)
+     })
+
+    attack_3.innerHTML=window.classes[2].move_3;
+    attack_3_desc.textContent = ice_wall.description;
+    move_3.addEventListener('click', function(){
+        turnCycle(wizard, goblin, ice_wall)
+     })
+
+    attack_4.innerHTML=window.classes[2].move_4;
+    attack_4_desc.textContent = invisibilty.description
+    move_4.addEventListener('click', function(){
+        turnCycle(wizard, goblin, invisibilty)
+     })
+    
+    selectBtn.style.display = 'none';
+    selectBtn1.style.display = 'none';
+    selectBtn2.style.display = 'none';
+    charBackground.style.display = 'none';
+    selectText.style.display = 'none'
+})
+//---Elf Button
+selectBtn2.addEventListener('click', function(){
+    const reset_button = document.querySelector('.reset-button')
+    reset_button.addEventListener('click', () => {
+    resetGame(elf, goblin)
+    });
+    
+    enemy_hp.textContent = goblin.hp;
+    enemy_maxhp.textContent = goblin.maxhp;
+    
+    const selectText = document.querySelector('.fighter-select')
+    const charBackground = document.querySelector('.char-select-background')
+    const char = document.querySelector('.character1')
+    char.style.backgroundImage = 'url(/sprites/elf-model.png)'
+    user_hp.innerHTML= window.classes[1].hp;
+    user_maxhp.innerHTML= window.classes[1].max_hp;
+
+    attack_1.innerHTML=window.classes[1].move_1;
+    attack_1_desc.textContent = fire_arrow.description;
+    move_1.addEventListener('click', function(){
+       turnCycle(elf, goblin, fire_arrow)
+    })
+
+    attack_2.innerHTML=window.classes[1].move_2;
+    attack_2_desc.textContent = stab.description;
+    move_2.addEventListener('click', function(){
+        turnCycle(elf, goblin, stab)
+     })
+
+    attack_3.innerHTML=window.classes[1].move_3;
+    attack_3_desc.textContent = attack_elixir.description;
+    move_3.addEventListener('click', function(){
+        turnCycle(elf, goblin, attack_elixir)
+     })
+
+    attack_4.innerHTML=window.classes[1].move_4;
+    attack_4_desc.textContent = dodge.description
+    move_4.addEventListener('click', function(){
+        turnCycle(elf, goblin, dodge)
+     })
+    
+    selectBtn.style.display = 'none';
+    selectBtn1.style.display = 'none';
+    selectBtn2.style.display = 'none';
+    charBackground.style.display = 'none';
+    selectText.style.display = 'none'
+})

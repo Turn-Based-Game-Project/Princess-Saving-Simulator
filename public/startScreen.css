@@ -10,7 +10,7 @@
     width: 100%;
   }
 
-  .card {
+  card {
     position: absolute;
     z-index: 1;
     margin-top: 350px;
@@ -31,8 +31,8 @@
 
   #start {
     font-size: 60px;
-    margin-left: 710px;
-    margin-top: 450px;
+    margin-left: 80vh;
+    margin-top: 55vh;
   }
 
   #dwarfSelect {
@@ -53,4 +53,30 @@
     margin-top: 700px;
     font-size: xx-large;
     padding-top: 2%;
+  }
+
+  @media screen and (max-width: 900px) {
+    #start {
+        font-size: 60px;
+        margin-left: 35vh;
+        margin-top: 50vh;
+      }
+      #Desc {
+        margin-top: 500px;
+        margin-left: 0px;
+      }
+      #dwarfSelect {
+        margin-left: 100px;
+        margin-top: 450px;
+      }
+    
+      #magicianSelect {
+        margin-left: 280px;
+        margin-top: 450px;
+      }
+    
+      #elfSelect {
+        margin-left: 400px;
+        margin-top: 450px;
+      }
   }

@@ -11,6 +11,7 @@ The git repo for the project is location:
 ```bash
 https://github.com/Turn-Based-Game-Project/Princess-Saving-Simulator
 ```
+Link to deployed application on Heroku: [https://sheltered-falls-73233.herokuapp.com/](https://sheltered-falls-73233.herokuapp.com/)
 
 ## Screenshots
 ![Login](/README-imgs/ps1.png)
@@ -23,5 +24,5 @@ https://github.com/Turn-Based-Game-Project/Princess-Saving-Simulator
 gabess3 https://github.com/gabess3<br />
 clarktr https://github.com/clarktr1<br />
 jmsoltero https://github.com/jmsoltero<br />
-[placeholder]
+gj3chavez https://github.com/gj3chavez<br />
 
